@@ -2614,7 +2614,7 @@
                 nests.forEach(nest => {
                     const nurseHomeRatio = nest.nurseHome / MAX_NURSE_EACH;
                     const baseRadius     = centerRadius + 15 + (nest.wood || 0) / 200 + (nest.food || 0) / 1000;
-                    const homeBonus      = (baseRadius - (centerRadius + 15)) * nurseHomeRatio * NURSE_HOME_DEFENSE_BONUS;
+                    const homeBonus      = (baseRadius - (centerRadius + 15)) * nurseHomeRatio;
                     nest.defenseRadius   = baseRadius + homeBonus;
                 });
                 timers.lastDefenseUpdate = now;
