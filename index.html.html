@@ -2610,7 +2610,7 @@
             nests.forEach(nest => updateNestStates(nest, now));
 
             // ── DefenseRadius + NurseHome patrol: cập nhật mỗi 5s ──
-            if (now - timers.lastDefenseUpdate >= 5000) {
+            if (now - timers.lastDefenseUpdate >= 1000) {
                 nests.forEach(nest => {
                     const nurseHomeRatio = nest.nurseHome / MAX_NURSE_EACH;
                     const baseRadius     = centerRadius + 15 + (nest.wood || 0) / 200 + (nest.food || 0) / 1000;
@@ -2909,7 +2909,7 @@
                 nests.forEach(nest => {
                     const mushroomRatio = nest.nurseMushroom / MAX_NURSE_EACH; // 0.0 → 1.0
                     if (nest.mushroom < MAX_MUSHROOM && nest.food > nest.mushroom && nest.water > nest.mushroom) {
-                        nest.food -= nest.mushroom / 2 * 3;
+                        nest.food -= nest.mushroom / 4 * 3;
                         nest.water -= nest.mushroom / 2;
                         const growAmount = 200 * (mushroomRatio * NURSE_MUSH_RATIO + (1 - NURSE_MUSH_RATIO));
                         nest.mushroom = Math.min(MAX_MUSHROOM, nest.mushroom + growAmount);
