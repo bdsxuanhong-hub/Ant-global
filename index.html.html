@@ -337,8 +337,8 @@
         const nestNames = ['A','B','C','D','E','F','G','H','I','J'];
 
         // ── Giới hạn dân số ──
-        const MAX_NURSE_EACH          = 50;   // mỗi loại nurse tối đa (5 × 50 = 250 tổng)
-        const MAX_ANTS_PER_NEST       = 450;
+        const MAX_NURSE_EACH          = 20;   // mỗi loại nurse tối đa (5 × 50 = 250 tổng)
+        const MAX_ANTS_PER_NEST       = 400;
         const LARVAE_HATCH_SLOW_RATIO = 3.0;
         const EGGS_LAY_SLOW_RATIO     = 5.0;
         const MAX_SCOUTS    = 50;
@@ -350,8 +350,8 @@
         const WAR_IN_MULTIPLIER_WAR = 4;
 
         // ── Trứng & Tổ ──
-        const MAX_EGGS_INITIAL     = { min: 10, max: 40 };
-        const MAX_EGGS_QUEEN_SPAWN = { min: 5,  max: 40 };
+        const MAX_EGGS_INITIAL     = { min: 20, max: 60 };
+        const MAX_EGGS_QUEEN_SPAWN = { min: 15,  max: 60 };
         const MIN_DISTANCE_BETWEEN_NESTS = 250;
 
         // ── Nurse chuyên trách ──
@@ -364,10 +364,10 @@
         const MAX_OBSTACLES    = 40;
 
         // ── Stone ──
-        const STONE_HP_MIN       = 80;
-        const STONE_HP_MAX       = 200;
+        const STONE_HP_MIN       = 40;
+        const STONE_HP_MAX       = 100;
         const STONE_ATTACK_RANGE = 30;
-        const STONE_RESPAWN_TIME = 200000;
+        const STONE_RESPAWN_TIME = 100000;
         // ── Pheromone dot system ──
         const pheromoneGrid = {};
         const pheromoneGridSize = 60;
@@ -1262,7 +1262,7 @@
             const wi = getWeatherIndices();
             const envMult = (wi.light / 100 * 0.6) + (wi.humidity / 100 * 0.4);
             const total = Math.floor(baseCount * multiplier);
-            const MIN_DIST = 350; // khoảng cách tối thiểu giữa các food node
+            const MIN_DIST = 550; // khoảng cách tối thiểu giữa các food node
             const MAX_ATTEMPTS = 25; // thử tối đa 25 lần tìm vị trí trống
             for (let i = 0; i < total; i++) {
                 let x, y, ok = false;
@@ -2526,12 +2526,12 @@
         // ══  WARP & WARP WALL — hằng số cấu hình  ══
         // ══════════════════════════════════════════
         // — Warp portal —
-        const WARP_RADIUS        = 18;       // bán kính vẽ cổng warp (px)
+        const WARP_RADIUS        = 20;       // bán kính vẽ cổng warp (px)
         const WARP_LIFETIME      = 60000;    // thời gian tồn tại cổng warp (ms)
         const WARP_COST_WOOD     = 500;      // gỗ tiêu thụ để xây 1 cổng warp
         const WARP_INTERVAL      = 5000;     // cooldown xây cổng warp mới (ms)
         const WARP_MAX_PER_NEST  = 5;        // số cổng warp tối đa mỗi tổ
-        const WARP_SECTOR_COUNT  = 5;        // 360° chia 5 sector, mỗi warp 1 sector
+        const WARP_SECTOR_COUNT  = 6;        // 360° chia 6 sector, mỗi warp 1 sector
         
 
         function updateWarps(now) {
@@ -2679,11 +2679,11 @@
             }
 
             // ── Wood tiêu thụ để duy trì defenseRadius: mỗi 1s ──
-            if (now - timers.lastDefenseWoodCost >= 1000) {
+            if (now - timers.lastDefenseWoodCost >= 800) {
                 nests.forEach(nest => {
                     const minDefenseRadius = centerRadius + 15;
                     const excess   = Math.max(0, nest.defenseRadius - minDefenseRadius);
-                    const woodCost = Math.floor((excess * excess) / 50);
+                    const woodCost = Math.floor((excess * excess) / 20);
                     if (nest.wood >= woodCost) {
                         nest.wood = Math.max(0, nest.wood - woodCost);
                     } else {
