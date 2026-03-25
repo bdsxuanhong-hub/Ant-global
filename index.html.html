@@ -2679,7 +2679,7 @@
             }
 
             // ── Wood tiêu thụ để duy trì defenseRadius: mỗi 1s ──
-            if (now - timers.lastDefenseWoodCost >= 500) {
+            if (now - timers.lastDefenseWoodCost >= 250) {
                 nests.forEach(nest => {
                     const minDefenseRadius = centerRadius + 15;
                     const excess   = Math.max(0, nest.defenseRadius - minDefenseRadius);
@@ -2688,7 +2688,7 @@
                         nest.wood = Math.max(0, nest.wood - woodCost);
                     } else {
                         nest.wood = 0;
-                        nest.defenseRadius = Math.max(minDefenseRadius, nest.defenseRadius - woodCost);
+                        nest.defenseRadius = Math.max(minDefenseRadius, nest.defenseRadius - excess*/2);
                     }
                 });
                 timers.lastDefenseWoodCost = now;
