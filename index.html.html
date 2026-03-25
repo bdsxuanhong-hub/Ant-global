@@ -2610,7 +2610,7 @@
             nests.forEach(nest => updateNestStates(nest, now));
 
             // ── DefenseRadius + NurseHome patrol: cập nhật mỗi 5s ──
-            if (now - timers.lastDefenseUpdate >= 500) {
+            if (now - timers.lastDefenseUpdate >= 800) {
                 nests.forEach(nest => {
                     const nurseHomeRatio = nest.nurseHome / MAX_NURSE_EACH;
                     const baseRadius     = centerRadius + 15 + (nest.wood || 0) / 200 + (nest.food || 0) / 1000;
@@ -2688,7 +2688,7 @@
                         nest.wood = Math.max(0, nest.wood - woodCost);
                     } else {
                         nest.wood = 0;
-                        nest.defenseRadius = Math.max(minDefenseRadius, nest.defenseRadius - excess/2);
+                        nest.defenseRadius = Math.max(minDefenseRadius, nest.defenseRadius - 10);
                     }
                 });
                 timers.lastDefenseWoodCost = now;
