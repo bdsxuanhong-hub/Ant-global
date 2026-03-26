@@ -2613,7 +2613,7 @@
             if (now - timers.lastDefenseUpdate >= 5000) {
                 nests.forEach(nest => {
                     const nurseHomeRatio = nest.nurseHome / MAX_NURSE_EACH;
-                    const baseRadius     = centerRadius + 15 + (nest.wood || 0) / 100 + (nest.food || 0) / 2000;
+                    const baseRadius     = centerRadius + 15 + (nest.wood || 0) / 20;
                     const homeBonus      = (baseRadius - (centerRadius + 15)) * nurseHomeRatio;
                     nest.defenseRadius   = baseRadius + homeBonus;
                 });
@@ -2683,7 +2683,7 @@
                 nests.forEach(nest => {
                     const minDefenseRadius = centerRadius + 15;
                     const excess   = Math.max(0, nest.defenseRadius - minDefenseRadius);
-                    const woodCost = Math.floor(excess);
+                    const woodCost = excess;
                     if (nest.wood >= woodCost) {
                         nest.wood = Math.max(0, nest.wood - woodCost);
                     } else {
