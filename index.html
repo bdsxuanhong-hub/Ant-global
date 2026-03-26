@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Đàn kiến v6</title>
+    <title>Đàn kiến v7</title>
 	<!-- PWA Manifest -->
 	<link rel="manifest" href="manifest.json">
 
@@ -2610,7 +2610,7 @@
             nests.forEach(nest => updateNestStates(nest, now));
 
             // ── DefenseRadius + NurseHome patrol: cập nhật mỗi 5s ──
-            if (now - timers.lastDefenseUpdate >= 800) {
+            if (now - timers.lastDefenseUpdate >= 5000) {
                 nests.forEach(nest => {
                     const nurseHomeRatio = nest.nurseHome / MAX_NURSE_EACH;
                     const baseRadius     = centerRadius + 15 + (nest.wood || 0) / 100 + (nest.food || 0) / 1000;
@@ -2679,16 +2679,16 @@
             }
 
             // ── Wood tiêu thụ để duy trì defenseRadius: mỗi 1s ──
-            if (now - timers.lastDefenseWoodCost >= 850) {
+            if (now - timers.lastDefenseWoodCost >= 500) {
                 nests.forEach(nest => {
                     const minDefenseRadius = centerRadius + 15;
                     const excess   = Math.max(0, nest.defenseRadius - minDefenseRadius);
-                    const woodCost = Math.floor((excess * excess) / 10);
+                    const woodCost = Math.floor(excess * excess);
                     if (nest.wood >= woodCost) {
                         nest.wood = Math.max(0, nest.wood - woodCost);
                     } else {
                         nest.wood = 0;
-                        nest.defenseRadius = Math.max(minDefenseRadius, nest.defenseRadius - excess* 0.5);
+                        nest.defenseRadius = Math.max(minDefenseRadius, nest.defenseRadius - 10);
                     }
                 });
                 timers.lastDefenseWoodCost = now;
